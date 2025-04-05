@@ -1,0 +1,190 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "RecordsService",
+      "version": "1.0"
+    },
+    "paths": {
+      "/records": {
+        "post": {
+          "tags": [
+            "RecordsService"
+          ],
+          "operationId": "CreateRecords",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Record"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "RecordsService"
+          ],
+          "operationId": "GetRecords",
+          "parameters": [
+            {
+              "name": "code",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "valueIncludes",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "takeCount",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "skipCount",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Record"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/logs": {
+        "get": {
+          "tags": [
+            "RecordsService"
+          ],
+          "operationId": "GetLogs",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/HttpLog"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "HttpLog": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "method": {
+              "type": "string",
+              "nullable": true
+            },
+            "path": {
+              "type": "string",
+              "nullable": true
+            },
+            "queryString": {
+              "type": "string",
+              "nullable": true
+            },
+            "requestBody": {
+              "type": "string",
+              "nullable": true
+            },
+            "statusCode": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "responseBody": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "Record": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "code": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "value": {
+              "maxLength": 100,
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
