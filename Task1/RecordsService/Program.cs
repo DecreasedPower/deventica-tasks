@@ -86,8 +86,6 @@ public class Record(int code, string value)
 {
   public int Id { get; init; }
   public int Code { get; set; } = code;
-
-  [MaxLength(100)]
   public string Value { get; set; } = value;
 }
 
@@ -101,7 +99,6 @@ public class HttpLog
   public string Path { get; set; } = default!;
   public string? QueryString { get; set; }
   public string? RequestBody { get; set; }
-
   public int StatusCode { get; set; }
   public string? ResponseBody { get; set; }
 }
