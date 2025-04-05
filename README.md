@@ -18,3 +18,20 @@ Logs
 | | varchar(MAX) | RequestBody |
 | | int | StatusCode |
 | | varchar(MAX) | ResponseBody |
+
+# Task 2
+1. Написать запрос, который возвращает наименование клиентов и кол-во контактов клиентов
+```
+SELECT c.ClientName, COUNT(cc.ContactValue) as ContactCount
+FROM Clients c
+JOIN ClientContacts cc ON c.Id = cc.ClientId
+GROUP BY c.ClientName
+```
+
+2. Написать запрос, который возвращает список клиентов, у которых есть более 2 контактов
+```
+SELECT ClientId
+FROM ClientContacts
+GROUP BY ClientId
+HAVING COUNT(ContactValue) > 2
+```
